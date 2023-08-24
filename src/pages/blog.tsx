@@ -24,6 +24,7 @@ const BlogPage: React.FC<PageProps<BlogPageQuery>> = ({ data }) => {
     error,
     data: apolloData,
   } = useQuery<GetBooksQuery>(APOLLO_QUERY);
+
   console.log(loading);
   console.log(error);
   console.log(apolloData);
