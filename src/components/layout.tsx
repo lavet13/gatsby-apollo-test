@@ -1,6 +1,8 @@
 import { Link } from 'gatsby';
 import * as React from 'react';
 import { useSiteMetadata } from '../hooks/use-site-metadata';
+import { Button } from 'gatsby-theme-material-ui';
+import { DarkModeContext } from '../contexts/dark-mode.context';
 
 type LayoutProps = {
   pageTitle: string;
@@ -10,6 +12,7 @@ const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
   children,
   pageTitle,
 }) => {
+  const { toggleDarkMode } = React.useContext(DarkModeContext);
   const data = useSiteMetadata();
 
   return (
@@ -40,6 +43,9 @@ const Layout: React.FC<React.PropsWithChildren<LayoutProps>> = ({
             >
               Blog
             </Link>
+          </li>
+          <li>
+            <Button onClick={toggleDarkMode}>Toggle Dark Mode</Button>
           </li>
         </ul>
       </nav>
