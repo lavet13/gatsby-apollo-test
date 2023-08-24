@@ -1,4 +1,4 @@
-import type { GatsbyConfig } from "gatsby"
+import type { GatsbyConfig } from 'gatsby';
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -7,8 +7,42 @@ const config: GatsbyConfig = {
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
   // Learn more at: https://gatsby.dev/graphql-typegen
-  graphqlTypegen: true,
-  plugins: [],
-}
+  plugins: [
+    'gatsby-plugin-image',
+    'gatsby-transformer-sharp',
+    {
+      resolve: 'gatsby-plugin-sharp',
+      options: {
+        defaults: {
+          placeholder: 'blurred',
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-graphql-codegen',
+      options: {
+        fileName: './__generated/gatsby-graphql.ts',
+        documentPaths: [`./src/**/*.{ts,tsx}`],
+        additionalSchemas: [
+          {
+            key: 'apollo-books-authors',
+            fileName: './__generated/graphql-books-authors.ts',
+            documentPaths: [`./src/**/*.{ts,tsx}`],
+            schema: 'http://localhost:4000/graphql',
+            pluckConfig: {
+              globalGqlIdentifierName: 'gql',
+              modules: [
+                {
+                  name: 'graphql-tag',
+                  identifier: 'gql',
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+};
 
-export default config
+export default config;
