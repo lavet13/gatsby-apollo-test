@@ -1,4 +1,5 @@
 import type { GatsbyConfig } from 'gatsby';
+import { plugin as reactApollo } from '@graphql-codegen/typescript-react-apollo';
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -22,24 +23,29 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-plugin-graphql-codegen',
       options: {
         fileName: './__generated/gatsby-graphql.ts',
-        documentPaths: [`./src/**/*.{ts,tsx}`],
-        additionalSchemas: [
-          {
-            key: 'apollo-books-authors',
-            fileName: './__generated/graphql-books-authors.ts',
-            documentPaths: [`./src/**/*.{ts,tsx}`],
-            schema: 'http://localhost:4000/graphql',
-            pluckConfig: {
-              globalGqlIdentifierName: 'gql',
-              modules: [
-                {
-                  name: 'graphql-tag',
-                  identifier: 'gql',
-                },
-              ],
-            },
-          },
+        documentPaths: [
+          `./src/**/*.{ts,tsx}`,
+          `./.cache/fragments/*.js`,
+          `./node_modules/gatsby-*/**/*.js`,
         ],
+        // additionalSchemas: [
+        //   {
+        //     key: 'apollo-books-authors',
+        //     fileName: './__generated/graphql-books-authors.ts',
+        //     documentPaths: [`./src/**/*.{ts,tsx}`],
+        //     codegenPlugins: [reactApollo],
+        //     schema: 'http://localhost:4000/graphql',
+        //     pluckConfig: {
+        //       globalGqlIdentifierName: 'gql',
+        //       modules: [
+        //         {
+        //           name: 'graphql-tag',
+        //           identifier: 'gql',
+        //         },
+        //       ],
+        //     },
+        //   },
+        // ],
       },
     },
     {
