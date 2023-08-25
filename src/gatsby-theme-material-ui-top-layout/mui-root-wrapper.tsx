@@ -14,21 +14,23 @@ import { DarkModeContext } from '../contexts/dark-mode.context';
 import theme from './theme';
 
 type WrapRootElementProps = {
-  element: React.ReactNode;
+  children: React.ReactNode;
 };
 
-export const TopLayout: FC<WrapRootElementProps> = ({ element }) => {
+export const TopLayout: FC<WrapRootElementProps> = ({ children }) => {
   const { mode } = useContext(DarkModeContext);
 
-  const adjustedTheme = createTheme({ palette: { mode: 'dark' } });
+  const adjustedTheme = React.useMemo(() => {
+    console.log('theme', theme, mode);
 
-  console.log('theme', theme, mode);
+    return createTheme({ ...theme, palette: { mode } });
+  }, [mode]);
 
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={adjustedTheme}>
         <CssBaseline />
-        {element}
+        {children}
       </ThemeProvider>
     </StyledEngineProvider>
   );

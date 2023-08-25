@@ -6,6 +6,7 @@ import Seo from '../components/seo';
 import Layout from '../components/layout';
 
 import { useQuery, gql } from '@apollo/client';
+import { CircularProgress } from '@mui/material';
 
 // apollo query
 const APOLLO_QUERY = gql`
@@ -35,9 +36,13 @@ const BlogPage: React.FC<PageProps<BlogPageQuery>> = ({ data }) => {
         <p key={name}>{name}</p>
       ))}
       <p>My cool books</p>
-      {apolloData?.books?.map(book => (
-        <p key={book?.id}>{book?.title}</p>
-      ))}
+      {loading ? (
+        <CircularProgress variant='indeterminate' />
+      ) : !error ? (
+        apolloData?.books?.map(book => <p key={book?.id}>{book?.title}</p>)
+      ) : (
+        <span>{error.message}</span>
+      )}
     </Layout>
   );
 };

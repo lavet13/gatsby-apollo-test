@@ -4,13 +4,13 @@ import client from './client';
 import { DarkModeProvider } from '../contexts/dark-mode.context';
 
 type WrapRootElementProps = {
-  element: React.ReactNode;
+  children: React.ReactNode;
 };
 
-export const ApolloClient: React.FC<WrapRootElementProps> = ({ element }) => {
+export const ApolloClient: React.FC<WrapRootElementProps> = ({ children }) => {
   return (
     <ApolloProvider client={client}>
-      <DarkModeProvider>{element}</DarkModeProvider>
+      <DarkModeProvider>{children}</DarkModeProvider>
     </ApolloProvider>
   );
 };
