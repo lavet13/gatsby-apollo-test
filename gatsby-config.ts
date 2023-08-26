@@ -23,11 +23,7 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-plugin-graphql-codegen',
       options: {
         fileName: './__generated/gatsby-graphql.ts',
-        documentPaths: [
-          `./src/**/*.{ts,tsx}`,
-          `./.cache/fragments/*.js`,
-          `./node_modules/gatsby-*/**/*.js`,
-        ],
+        documentPaths: [`./src/**/*.{ts,tsx}`],
         // additionalSchemas: [
         //   {
         //     key: 'apollo-books-authors',

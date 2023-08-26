@@ -4,7 +4,6 @@ import { FC, useContext } from 'react';
 import {
   CssBaseline,
   ThemeProvider,
-  Theme,
   StyledEngineProvider,
 } from '@mui/material';
 
